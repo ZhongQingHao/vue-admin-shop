@@ -11,7 +11,21 @@
       <!-- <el-input v-model="input" placeholder="请输入内容"></el-input> -->
     <!-- 按钮 -->
 
-    <!-- 表格组件 -->
+   <!--
+         表格组件
+         data:表格组件将来需要展示的数据------数组类型
+         border：是给表格添加边框
+         column属性
+         label：显示标题
+         width：对应列的宽度
+         align：标题的对齐方式
+         prop:对应列内容的字段名
+         type:如果设置了索引那么就从一开始
+         border：边框
+         注意1：elementUI当中的table组件，展示的数据是以一列一列进行展示数据
+       -->
+
+
     <el-table style="width: 100%" border :data="list">
       <el-table-column prop="id" label="序号" width="80px" align="center">
       </el-table-column>
@@ -35,17 +49,20 @@
             @click="deleteTradeMark(row)">删除</el-button
           >
         </template>
-        <!-- <el-button type="primary" icon="el-icon-edit"  size="mini" circle></el-button>
-        <el-button type="danger" icon="el-icon-delete" size="mini" circle></el-button> -->
       </el-table-column>
     </el-table>
 
-    <!--  
-      
-      分页器 
-      
-    
-    
+    <!--
+      分页器
+      当前第几页、数据总条数、每一页展示条数、连续页码数
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      current-page:代表的是当前第几页
+      total：代表分页器一共需要展示数据条数
+      page-size：代表的是每一页需要展示多少条数据
+      page-sizes：代表可以设置每一页展示多少条数据
+      layout：可以实现分页器布局
+      pager-count:按钮的数量  如果 9  连续页码是7 如果7 连续页码数是5
     -->
 
     <el-pagination
@@ -95,27 +112,7 @@
 
 <script>
 export default {
-  name: "trademark",
-  // data(){
-  //   return {
-  //     tabledata: [
-  //   {"name":'spider',"logo":"logo","id":1},
-  //   {"name":'张三',"logo":"logo2","id":2},
-  //   {"name":'李四',"logo":"logo3","id":3}],
-  //     dialogTableVisible: false,
-  //       dialogFormVisible: false,
-  //       form: {
-  //         name: '',
-  //         region: '',
-  //         date1: '',
-  //         date2: '',
-  //         delivery: false,
-  //         type: [],
-  //         resource: '',
-  //         desc: ''
-  //       },
-  //       formLabelWidth: '120px'
-  //   }
+  name: "tradeMark",
   data() {
     // 自定义表单验证 element
     var validateTmName = (rule,value,callback) =>{
@@ -163,7 +160,7 @@ export default {
     async getPageList(pager = 1) {
       this.page = pager;
       const { page, limit } = this;
-      let result = await this.$API.tradmark.reqTradeMarkList(page, limit);
+      let result = await this.$API.trademark.reqTradeMarkList(page, limit);
       if (result.code == 200) {
         // 分别是展示数据总条数与列表
         this.total = result.data.total;
@@ -219,7 +216,7 @@ export default {
           type: 'warning'
         }).then(async () => {
           // 当用户点击确认按钮时
-          let result = await this.$API.tradmark.deleteTradeMark(row.id)
+          let result = await this.$API.trademark.deleteTradeMark(row.id)
           if (result.code == 200){
             this.$message({
             type: 'success',
@@ -233,7 +230,7 @@ export default {
           this.$message({
             type: 'info',
             message: '已取消删除'
-          });          
+          });
         });
       },
 
@@ -245,7 +242,7 @@ export default {
       this.$refs.ruleForm.validate(async (success) =>{
         // 如果全部字段符合条件
         if (success){
-          let result = await this.$API.tradmark.reqAddOrUpdataTradeMark(
+          let result = await this.$API.trademark.reqAddOrUpdataTradeMark(
             this.tmForm
           );
           if (result.code == 200) {
@@ -258,13 +255,13 @@ export default {
             // 添加或修改品牌成功再次获取列表
             // 如果添加品牌成功停留在第一页，如果是修改品牌应该留在当前页
             this.getPageList(this.tmForm.id ? this.page : 1);
-          } 
+          }
         }else{
             console.log('error submmit!!')
             return false
           }
       })
-    
+
     },
   },
 
