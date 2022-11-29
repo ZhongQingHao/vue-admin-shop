@@ -171,19 +171,28 @@ export default {
     },
     //添加按钮的回调
     addSaleAttrValue(row) {
+      console.log(row)
       //点击销售属性值当中添加按钮的时候，需要有button变为input,通过当前销售属性的inputVisible控制
       this.$set(row, "inputVisible", true); //挂载在销售属性身上的响应式数据inputVisible，控制button与input切换
       this.$set(row, "inputValue", ""); //通过响应式数据inputValue字段收集新增的销售属性值
+      this.$nextTick(() => {
+        // //$nextTick,当节点渲染完毕了，会执行一次
+        this.$refs.saveTagInput.focus() // input 设置焦点
+      });
     },
     //el-input失却焦点的事件
     handleInputConfirm(row) {
       const { baseSaleAttrId, inputValue } = row; //解构出销售属性当中收集数据
       let newSaleAttrValue = { baseSaleAttrId, saleAttrValueName: inputValue }; //新增的销售属性值
-      if (inputValue.trim() == "") return this.$message("属性值不能为空"); //新增的销售属性值的名称不能为空
-      let result = row.spuSaleAttrValueList.some(
+      if (inputValue.trim() == "") {
+        row.inputVisible = false; // 隐藏编辑
+        return this.$message("属性值不能为空");
+      };
+       //新增的销售属性值的名称不能为空
+      let result = row.spuSaleAttrValueList.some( // some 返回bool 真表示存在重复Value
         (item) => item.saleAttrValueName == inputValue //属性值不能重复,这里也可以用some
       );
-      if (result) return;
+      if (result) return this.$message("属性值不能重复");
       row.spuSaleAttrValueList.push(newSaleAttrValue); //新增
       row.inputVisible = false; //修改inputVisible为false，不就显示button
     },
