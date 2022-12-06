@@ -11,7 +11,7 @@
 
     <el-row>
       <el-col :span="5">
-        <el-input v-model="input" placeholder="搜索sku" @blur="getFindSkuInfo" @keyup.enter.native="getFindSkuInfo" clearable></el-input>
+        <el-input v-model="input" placeholder="搜索名称" @blur="getFindSkuInfo" @keyup.enter.native="getFindSkuInfo" clearable></el-input>
 
       </el-col>
       <el-col :span="3">
