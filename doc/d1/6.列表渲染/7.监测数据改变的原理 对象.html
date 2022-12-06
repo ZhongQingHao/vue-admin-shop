@@ -1,0 +1,43 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello vuew</title>
+
+    <script src="../../vue.js"></script>
+
+    <style>
+
+    </style>
+</head>
+<body>
+
+    <div id="root">     
+        <h2>名称 {{ name }}</h2>
+        <h2>地址 {{ address }}</h2>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                name:'spider',
+                address: '深圳',
+                age:{
+                    rage:'39',
+                    sage:'18'
+                },
+                test:[{'age':10,'name':'tom'}]
+            }
+        }
+        )
+    
+        
+    </script>
+</body>
+</html>

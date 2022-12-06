@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello vuew</title>
+
+    <script src="../../vue.js"></script>
+
+    <style>
+        *{
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- class="xx" el:.xx  -->
+    <div id="root"> 
+        姓：<input type="text" v-model:value="firstName"> <br>
+        名: <input type="text" v-model:value="lastName"> <br>
+        测试: <input type="text" v-model:value="test"> <br>
+        全名: <span> {{ fullName }}</span> <br>
+        
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+
+        // 计算属性computed和watch监视属性之间的区别
+        // 1.computed可以完成的功能，watch都可以完成
+        // 2.watch可以完成的功能，computed不一定可以完成
+        // 两个重要的小原则
+        // 1.所被vue管理的函数，最好写成普通函数，这样this指向的才是vm或组件实例对象
+        // 2.所有不被vue管理的函数（定时器的回调函数，ajax的回调函数 promise的回调函数 异步函数）最好写成箭头函数
+        //  这样this的指向才是vm或组件实例对象
+
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                "firstName":"张",
+                "lastName":"三",
+                "fullName": "张-三"
+            },
+            computed:{
+            },
+            watch:{ // watch 和 computed  watch支持更加自定义 例如下边定时器，而computed计算属性 计算属性时无法处理 依靠返回值
+                firstName(newValue){
+                    setTimeout(() => { //   非vue管理函数，预览器js引擎管理 需要写成箭头函数本作用域没有this向上获取firstName Vue管理函数
+                        this.fullName = newValue + '-' + this.lastName
+                    }, 1000);
+                    
+                },
+                lastName(newValue){
+                    this.fullName = this.firstName + '-' + newValue
+                    
+                }
+            }
+        },
+        )
+        
+    </script>
+</body>
+</html>

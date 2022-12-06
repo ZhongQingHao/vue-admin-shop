@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello vuew</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+<!-- 
+
+    1、vue常用键盘按键别名
+    1、enter
+    2、delete
+    3、esc
+    4、space
+    5、tab（特殊keydown使用） ctrl alt shift meta同理
+    6、up down left right 等
+    
+    2、vue未提供别名键盘，可以使用按键原始的key值去绑定，但要注意转为kebab-case(短横线命名)
+   
+    3、 系统修饰键 ctrl alt shift meta键(特殊)
+        keyup 按下修饰盘同时，再按下其他键，随后释放其他键，事件才触发
+        keydown 正常
+    4、也可以使用keyCode 是指定具体的按键 不推荐
+    5、Vue.config.keyCodes.自定义键名 = 键码，可以定制别名
+
+
+ -->
+    <div id="root"> 
+        <h1> 欢迎学习：{{ name }}</h1>
+        输入框
+        <input type="text" placeholder="按下回车提示输入" @keyup.enter="showInfo1">
+<!-- 支持组合键 例: keyup.enter.y  同时回车+y-->
+        <input type="text" placeholder="按下回车提示输入" @keyup.enter="showInfo1">
+    </div>
+
+    <script text="text/javascript">
+
+        Vue.config.productionTip = false
+        const vm =new Vue({
+            el: "#root",
+            data:{name:"spider"},
+            methods:{
+                showInfo1(e){
+                    //if (e.keyCode !== 13) return // 函数内代码基于keycode判断方式，vue有更方便方法 例：enter
+                    // console.log(e.keyCode) 获取键盘输入对应keycode码 回车==13
+                    console.log(e.target.value)
+                    console.log(e.key,e.keyCode) // 打印键盘对应别名键盘码
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

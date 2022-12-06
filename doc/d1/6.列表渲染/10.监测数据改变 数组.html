@@ -1,0 +1,78 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello vuew</title>
+
+    <script src="../../vue.js"></script>
+
+    <style>
+
+    </style>
+</head>
+<body>
+
+    <div id="root">     
+        <h2>学校名称: {{ name }}</h2>
+        <h2>学校地址: {{ address }}</h2>
+        <hr>
+        <button @click="addSex">添加性别属性</button>
+        <h2>名称: {{ student.name }}</h2>
+        <h2 v-if="student.sex">性别: {{ student.sex }}</h2>
+        <h2>年龄:  真实{{ student.age.rAge }},对外{{ student.age.sAge }}</h2>
+        <h2>爱好:</h2>
+        <ul>
+            <li v-for="(h,index) in student.hobby" :key="index"> {{ h }}</li>
+        </ul>
+        <h2>朋友们:</h2>
+        <ul>
+            <li v-for="(f,index) in student.friends" :key="index"> {{ f.name }}  -- {{ f.age }}</li>
+        </ul>
+
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                name:'spider',
+                address: '深圳',
+                student:{
+                    name: "王老五",
+                    // sex:"男",  不定义属性时 插值调用属性 undefine 后边内存声明变量vue也监测不到 后续更新使用Vue.set
+                    // vm.$set(vm._data.student,"sex","男")
+                    // Vue.set(vm.student,"sex","男") // 数据代理
+                    // 确保不是在vue vm实例或根 data set无法使用
+                    age:{
+                        rAge:'39',
+                        sAge:'18'
+                },
+                hobby:["抽烟","喝酒","汤头"], // vue并不会为数组实现对象方式 setter getter 使用数组7个方法进行监测
+                // push pop shift unshift splice sort reverse  Vue重写了数组这类方法   方法重载
+                friends:[
+                    {'age':35,'name':'tom'},
+                    {'age':35,'name':'jerry'}
+            ]
+                },
+                
+            },
+            methods: {
+                addSex(){
+                    //Vue.set(this.student,'sex','男')
+                    this.$set(this.student,'sex','男')
+                   // this.$set(this.student.hobby,'1','打台球') 同时支持数组修改不影响动态渲染
+
+                }
+            },
+        }
+        )
+    
+        
+    </script>
+</body>
+</html>

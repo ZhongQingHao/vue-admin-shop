@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello vuew</title>
+
+    <script src="../../vue.js"></script>
+
+    <style>
+    </style>
+</head>
+<body>
+
+
+    <!-- 
+        生命周期：
+            1.又名：生命周期回调函数、生命周期函数、生命周期钩子
+            2.是什么： Vue在关键时刻帮我们调用的一些特殊名称函数。
+            3.生命周期函数的名字不可更改，但函数的具体内容是程序员根据需求编写的。
+            4.生命周期函数中的this指向的是vm,或组件实例对象。
+
+
+        常用生命周期钩子函数:
+            1.mounted: 发送ajax请求、启动定时器、绑定自定义事件、订阅消息等【初始化操作】。
+            2.beforDestory:清除定时器、解绑自定义事件、取消订阅消息等【收尾工作】
+        
+        关于销毁Vue实例：
+            1.销毁后借助Vue开发者工具调试看不到任何信息
+            2.销毁后自定义的事件会失败清理，但原生DOM事件依旧还在。
+            3.一般不会在beforDestory操作数据，因为即便操作数据，也不会再触发更新流程了。
+
+     -->
+
+    <div id="root">    
+        <h2 :style="{opacity}">{{name}}</h2>
+        <button @click="stop"> 停止(优雅停止定时器)</button>
+        <button @click="opacity = 1"> 透明度设置成1</button>
+        <button @click="stop2"> 停止(暴力销毁)并在before回收定时器</button>
+
+    </div>
+
+    
+
+
+    <script>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                name:'spider',
+                opacity:1,
+            },
+            methods: {
+                stop(){
+                    clearInterval(this.id)
+                },
+                stop2(){
+                    this.$destroy() // 如果只销毁vm 定时器还在运行 可以在beforeDestroy()函数内清理回收
+                    // 可以在函数内自杀，清理定时器 但无法防止它杀不调用，需要在生命周期销毁前执行
+                }
+            },
+            mounted(){
+                this.id = setInterval(() =>{
+                    this.opacity -= 0.01
+                    if(this.opacity <=0) this.opacity =1
+                },16)
+            },
+            beforeDestroy() { 
+                console.log("vm即将销毁 准备回收资源 例定时器")
+                clearInterval(this.id)
+            },
+        })  
+        
+    </script>
+</body>
+</html>

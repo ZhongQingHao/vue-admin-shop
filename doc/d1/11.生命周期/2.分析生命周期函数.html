@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello vuew</title>
+
+    <script src="../../vue.js"></script>
+
+    <style>
+    </style>
+</head>
+<body>
+
+
+    <!-- 
+        生命周期：
+            1.又名：生命周期回调函数、生命周期函数、生命周期钩子
+            2.是什么： Vue在关键时刻帮我们调用的一些特殊名称函数。
+            3.生命周期函数的名字不可更改，但函数的具体内容是程序员根据需求编写的。
+            4.生命周期函数中的this指向的是vm,或组件实例对象。
+
+        
+            // 建议查看官网生命周期过程图
+
+        张三的一生（张三的生命周期）：
+                将要出生
+        （重要） 呱呱坠地===》检查身体各项指标
+                学会说话
+                学会走路
+                。。。。。
+                。。。。。
+        (重要)   将要永别===》交代后事
+                已经永别
+        
+        vm的一生(vm的生命周期):
+                将要创建 ===>调用beforeCreate函数
+                创建完毕 ===>调用created函数
+                将要挂载 ===>调用beforeMount函数
+        (重要)   挂载完毕 ===>调用mounted函数 === 重要钩子
+                将要更新 ===>调用beforeUpdate函数
+                更新完毕 ===>调用updated函数
+        (重要)   将要销毁 ===>调用beforeDestroy函数 === 重要钩子
+                销毁完毕 ===>调用destroyed函数
+
+
+
+
+     -->
+
+    <div id="root">    
+        <h2>当前n的值是:{{n}}</h2>
+        <button @click="add">点我n加1</button>
+        <button @click="bye">点我销毁vm</button>
+
+    </div>
+
+    
+
+
+    <script>
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+            el:'#root',
+            // template:`
+            // <div>
+            //         <h2>当前n的值是:{{n}}</h2>
+            //         <button @click="add">点我n加1</button>
+            // </div>
+            // `,
+            data:{
+                name:'spider',
+                n:1,
+            },
+            methods: {
+                add(){
+                    console.log('add')
+                    this.n++
+                },
+                bye(){
+                    console.log('bye')
+                    this.$destroy()
+                }
+            },
+            watch:{
+                n(){
+                    console.log('n变了')
+                }
+            },
+            beforeCreate() {
+                console.log('beforeCreate')
+            },
+            created() {
+                console.log('created')
+            },
+            beforeMount() {
+                console.log('beforeMount')
+            },
+            mounted() {
+                console.log('mounted',this.$el instanceof HTMLElement)
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate')
+                console.log(this.n)
+                // debugger
+                // 数据已经更新 虚拟dom已经更新，还未更新页面
+            },
+            updated() {
+                console.log('updated')
+                // console.log(this.n)
+                // debugger
+                // 最终完成dom diff并更新页面
+            },
+            beforeDestroy() {
+                console.log('准备销毁beforeDestroy 可以在此回收关闭处理后事 重要：但在此阶段不渲染更新页面')
+                this.add() // 有执行 但不更新页面
+                this.n = 99 // 有执行 但不更新页面
+            },
+            destroyed() {
+                console.log('销毁了destroyed')
+            },
+
+
+
+        })  
+        
+    </script>
+</body>
+</html>

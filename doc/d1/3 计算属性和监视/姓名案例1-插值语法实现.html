@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello vuew</title>
+
+    <script src="../../vue.js"></script>
+
+    <style>
+        *{
+            margin: 10px;
+        }
+    </style>
+    <script>
+
+        // v-model 双向绑定指令只能用于表单 “输入类元素” value值  input select ... 数据不仅通过data流向页面 还可以通过页面流向data
+        // v-bind 单项绑定 数据只能通过data流向页面
+    </script>
+</head>
+<body>
+    <!-- class="xx" el:.xx  -->
+    <div id="root"> 
+        姓：<input type="text" v-model:value="firstName"> <br>
+        名: <input type="text" v-model:value="lastName"> <br>
+        全名: <span>{{firstName.slice(0,3)}} - {{ lastName }}</span>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+
+        new Vue({
+            el:'#root',
+            data:{
+                "firstName":"张",
+                "lastName":"三",
+            }
+        },
+        )
+        
+    </script>
+</body>
+</html>

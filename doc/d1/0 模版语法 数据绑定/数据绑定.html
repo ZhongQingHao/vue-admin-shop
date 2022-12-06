@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello vuew</title>
+
+    <script src="../vue.js"></script>
+
+    <script>
+
+        // v-model 双向绑定指令只能用于表单 “输入类元素” value值  input select ... 数据不仅通过data流向页面 还可以通过页面流向data
+        // v-bind 单项绑定 数据只能通过data流向页面
+    </script>
+</head>
+<body>
+    <!-- class="xx" el:.xx  -->
+    <div id="root"> 
+
+
+        <!-- 普通写法 -->
+        <!-- 单项数据绑定:
+        <input type="text" v-bind:value="d1.name"><br>
+        双向数据绑定
+        <input type="text" v-model:value="d1.name"> -->
+
+        <!-- 简写方式 -->
+        单项数据绑定:
+        <input type="text" :value="d1.name"><br>
+        <input type="text" v-model="d1.name">
+    </div>
+
+    <script>
+        Vue.config.productionTip = false,
+
+        new Vue({
+            el:'#root',
+            data:{
+                "hello":"xxxx",
+                "d1":{name:"spider",age: 24},
+                "url":"http://www.qq.com"
+            }
+        },
+        )
+        // console.log(x)
+        
+    </script>
+</body>
+</html>

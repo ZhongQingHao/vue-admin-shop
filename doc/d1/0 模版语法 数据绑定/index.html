@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello vuew</title>
+
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <!-- class="xx" el:.xx  -->
+    <div id="root"> 
+        <h1>Hello {{ d1.name }} {{ Date.now() }}</h1>
+        <h2>{{ d1 }} </h2>
+        <a :href="url">点我访问</a>
+        <a v-bind:href="url.toUpperCase()" v-bind:x="hello">点我访问2</a>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+        new Vue({
+            el:'#root',
+            data:{
+                "hello":"xxxx",
+                "d1":{name:"spider",age: 24},
+                "url":"http://www.qq.com"
+            }
+        },
+        )
+        // console.log(x)
+        
+    </script>
+</body>
+</html>
