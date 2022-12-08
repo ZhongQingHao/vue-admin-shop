@@ -1,0 +1,87 @@
+<template>
+  <el-card>
+    <!-- 头部 -->
+    <div slot="header" class="header">
+      <div class="search-header">
+        <span>线上热门搜索</span>
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            <i class="el-icon-more"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>黄金糕</el-dropdown-item>
+            <el-dropdown-item>狮子头</el-dropdown-item>
+            <el-dropdown-item>螺蛳粉</el-dropdown-item>
+            <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+            <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+    </div>
+    <!-- 内容  -->
+    <div>
+      <el-row :gutter="10">
+        <el-col :span="12"><lineChart></lineChart></el-col>
+        <el-col :span="12"><lineChart></lineChart></el-col>
+      </el-row>
+      <!-- table表格 -->
+      <el-table :data="tableData" style="width: 100%" border>
+        <el-table-column prop="test1" label="排名" width="80" type="index">
+        </el-table-column>
+        <el-table-column prop="test2" label="搜索关键字" width="180">
+        </el-table-column>
+        <el-table-column prop="test3" label="用户数" sorttable>
+        </el-table-column>
+        <el-table-column prop="test4" label="周涨幅" sorttable>
+        </el-table-column>
+      </el-table>
+      <!--  分页器 -->
+      <el-pagination
+        layout="prev, pager, next"
+        :total="1000"
+        class="pagination"
+      >
+      </el-pagination>
+    </div>
+  </el-card>
+</template>
+
+  <script>
+import lineChart from "./lineChart";
+export default {
+  name: "",
+  components: { lineChart },
+  data() {
+    return {
+      tableData: [
+        {
+          test1: "1",
+          test2: "吃喝",
+          test3: "100",
+          test4: "80%",
+        },
+        {
+          test1: "2",
+          test2: "穿搭",
+          test3: "80",
+          test4: "10%",
+        },
+      ],
+    };
+  },
+};
+</script>
+
+  <style scoped>
+.search-header {
+  display: flex;
+  justify-content: space-between;
+}
+.header {
+  border-bottom: 1px solid #eee;
+  padding: 5px 0px;
+}
+.pagination {
+  float: right;
+}
+</style>

@@ -24,11 +24,6 @@
   <script>
   export default {
     name:'Detail',
-    data(){
-      return {
-        title1:'哈啰'
-      }
-    },
     props:['title','count']
 
   }
@@ -51,5 +46,7 @@
     }
     .card-footer{
       border-top: 1px solid #eee;
+      padding-top: 10px;
     }
+
   </style>
