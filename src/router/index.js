@@ -98,6 +98,12 @@ export const constantRoutes = [
       name: "Product",
       meta: { title: '权限管理', icon: 'el-icon-lock' },
     },
+    {
+      path: '/product',
+      component: Layout,
+      name: "Product",
+      meta: { title: '审计日志', icon: 'el-icon-view' },
+    },
   {
     path: 'external-link',
     component: Layout,

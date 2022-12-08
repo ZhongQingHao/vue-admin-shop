@@ -1,19 +1,34 @@
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
+      <keep-alive :include="cachedViews">
       <router-view :key="key" />
+    </keep-alive>
     </transition>
+    <copy-right v-if="isEnter" />
   </section>
 </template>
 
 <script>
+import CopyRight from './CopyRight'
 export default {
   name: 'AppMain',
+  components: {
+    CopyRight
+  },
   computed: {
+    // cachedViews() {
+    //   return this.$store.state.tagsView.cachedViews
+    // },
     key() {
       return this.$route.path
     }
-  }
+  },
+  data() {
+    return {
+      isEnter: false
+    }
+  },
 }
 </script>
 
