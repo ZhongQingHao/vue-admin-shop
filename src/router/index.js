@@ -87,6 +87,18 @@ export const constantRoutes = [
     ]
     },
     {
+      path: '/monitoring',
+      component: Layout,
+      redirect: '/monitoring/list',
+      meta: { title: '服务监控', icon: 'el-icon-view' },
+      children: [{
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/monitoring'),
+        meta: { title: '监控列表', icon: 'el-icon-view' }
+      }]
+    },
+    {
       path: '/product',
       component: Layout,
       name: "Product",
