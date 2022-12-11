@@ -16,6 +16,9 @@ import Observe from './Observe'
 export default {
   name: 'Dashboard',
   components:{Card,Sale,Observe},
+  mounted(){
+    this.$store.dispatch('getData');
+  }
 }
 </script>
 
