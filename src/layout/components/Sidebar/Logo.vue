@@ -25,7 +25,8 @@ export default {
   data() {
     return {
       title: 'Spider管理后台',
-      logo: 'https://v2.cn.vuejs.org/images/logo.svg'
+      //logo: 'https://v2.cn.vuejs.org/images/logo.svg'
+      logo: require('@/assets/logo.png')
     }
   }
 }
