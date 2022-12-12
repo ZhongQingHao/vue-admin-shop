@@ -59,8 +59,13 @@ export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+      // if (!validUsername(value)) {
+      //   callback(new Error('Please enter the correct user name'))
+      // } else {
+      //   callback()
+      // }
+      if (value.length < 4) {
+        callback(new Error('The user name can not be less than 4 digits'))
       } else {
         callback()
       }

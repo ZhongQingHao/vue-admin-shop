@@ -37,7 +37,7 @@
       </el-table-column>
       <el-table-column prop="price" label="价格" width="80">
       </el-table-column>
-      <el-table-column prop="prop" label="操作" width="width">
+      <el-table-column label="操作" width="width">
         <template slot-scope="{row,$index}">
           <el-button type="success" icon="el-icon-sort-down" size="mini" title="下架" v-if="row.isSale == 0" @click="cancel(row)"></el-button>
           <el-button type="success" icon="el-icon-sort-up" size="mini" title="上架" v-else @click="sale(row)"></el-button>
@@ -63,7 +63,6 @@
 <el-drawer
   :title="`${skuInfo.skuName} 详情介绍`"
   :visible.sync="show"
-  :before-close="false"
   size="50%">
   <el-row>
     <el-col :span="5">名称</el-col>

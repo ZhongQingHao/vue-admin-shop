@@ -34,7 +34,11 @@ router.beforeEach(async(to, from, next) => {
           // get user info
           await store.dispatch('user/getInfo')
 
-          next()
+          // next()
+          // https://blog.csdn.net/ruofanwei/article/details/117158602?spm=1001.2014.3001.5502
+          // https://blog.csdn.net/baidu_38730364/article/details/124269377
+          // 动态路由刷新 页面空白
+          next({...to,replace:true});
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

@@ -7,8 +7,8 @@ import * as spu from './product/spu';
 
 // 引入权限相关接口文件
 import * as user from './acl/user'
-import * as role from './acl/role'
-import * as permission from './acl/permission'
+import role from './acl/role';
+import permission from './acl/permission'
 
 export default {
   trademark,
